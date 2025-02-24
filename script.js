@@ -66,7 +66,7 @@ function encrypt(method, shift, key, text){
 
 function decrypt(method, shift, key, text){
     if(method==='Ceasar'){
-        shift=-shift;
+        shift=-(shift%26);
         ceasarCipher(shift+26,text);
     }
     else if(method==='ROT13'){
