@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>simpleCipher</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <div class="banner">
+    <p>simpleCipher</p>
+  </div>
+
+  <div class="content-box">
+    <div class="spec-select">
+      <select class="mode-select">
+        <option value="" selected disabled>Select the mode</option>
+        <option value="Encrypt">Encrypt</option>
+        <option>Decrypt</option>
+      </select>
+      <select class="cipher-select">
+        <option value="" selected disabled>Choose an encryption method</option>
+        <option value="Ceasar">Ceasar Cipher</option>
+        <option value="ROT13">ROT13 Cipher</option>
+        <option value="atbash">Atbash Cipher</option>
+        <option value="vigenere">Vigenère Cipher</option>
+       </select>
+       <input placeholder="Enter the shift value" class="shift-input">
+       <input placeholder="Enter the key" class="key-input">
+       <div class="error-container" disabled>Error!</div>
+    </div>
+
+    <div class="text-section">
+      <div class="input-container">
+        <p><b>Input:</b></p>
+        <textarea placeholder="type here..." class="input-textarea" spellcheck="false"></textarea>
+        <div class="buttons">
+          <button class="clear-button">Clear</button>
+          <button class="convert-button">Convert</button>
+        </div>
+      </div>
+      <div class="output-container">
+        <p><b>Output:</b></p>
+        <textarea class="output-textarea" spellcheck="false" readonly></textarea>
+      </div>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
