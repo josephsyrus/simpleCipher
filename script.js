@@ -60,7 +60,7 @@ function encrypt(method, shift, key, text){
         atbashCipher(text);
     }
     else  if(method==='vigenere'){
-        console.log('vig!!');
+        vigenereCipherEncrypt(key,text);
     }
 }
 
@@ -74,6 +74,9 @@ function decrypt(method, shift, key, text){
     }
     else if(method==='atbash'){
         atbashCipher(text);
+    }
+    else if(method==='vigenere'){
+        vigenereCipherDecrypt(key,text);
     }
 }
 
@@ -119,7 +122,12 @@ function atbashCipher(text) {
     output.value=encrypted;
 }
 
-function vigenereCipher(key,text){
+function vigenereCipherEncrypt(key,text){
+    if(key===''){
+        errorMessage.style.display="block";
+        return;
+    }
+
     const keyLen=key.length;
     const textLen=text.length;
     const rpt=Math.ceil(textLen/keyLen);
@@ -157,3 +165,46 @@ function vigenereCipher(key,text){
     output.value=encrypted;
 }
 
+
+function vigenereCipherDecrypt(key,text){
+    if(key===''){
+        errorMessage.style.display="block";
+        return;
+    }
+
+    const keyLen=key.length;
+    const textLen=text.length;
+    const rpt=Math.ceil(textLen/keyLen);
+    let extendedKey=key.repeat(rpt);
+    extendedKey=extendedKey.slice(0,textLen);
+
+    let decrypted='';
+    for(let i=0; i<textLen; i++){
+
+        let shift=extendedKey[i].charCodeAt(0);
+        if(shift>=65&&shift<=90){
+            shift-=65;
+        }
+        else if(shift>=97&&shift<=122){
+            shift-=97;
+        }
+        shift=(-shift)+26;
+        if(text[i].match(/[a-zA-Z]/)){
+            let base;
+            let asciiCode=text[i].charCodeAt(0);
+            if(asciiCode>=65&&asciiCode<=90){
+                base=65;
+            }
+            else if(asciiCode>=97&&asciiCode<=122){
+                base=97;
+            }
+            let newAsciiCode=(((asciiCode-base+shift)%26)+base);
+            let char=String.fromCharCode(newAsciiCode);
+            decrypted+=char;
+        }
+        else{
+            decrypted+=text[i];
+        }
+    }
+    output.value=decrypted;
+}
