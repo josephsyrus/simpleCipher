@@ -119,3 +119,41 @@ function atbashCipher(text) {
     output.value=encrypted;
 }
 
+function vigenereCipher(key,text){
+    const keyLen=key.length;
+    const textLen=text.length;
+    const rpt=Math.ceil(textLen/keyLen);
+    let extendedKey=key.repeat(rpt);
+    extendedKey=extendedKey.slice(0,textLen);
+
+    let encrypted='';
+    for(let i=0; i<textLen; i++){
+
+        let shift=extendedKey[i].charCodeAt(0);
+        if(shift>=65&&shift<=90){
+            shift-=65;
+        }
+        else if(shift>=97&&shift<=122){
+            shift-=97;
+        }
+
+        if(text[i].match(/[a-zA-Z]/)){
+            let base;
+            let asciiCode=text[i].charCodeAt(0);
+            if(asciiCode>=65&&asciiCode<=90){
+                base=65;
+            }
+            else if(asciiCode>=97&&asciiCode<=122){
+                base=97;
+            }
+            let newAsciiCode=(((asciiCode-base+shift)%26)+base);
+            let char=String.fromCharCode(newAsciiCode);
+            encrypted+=char;
+        }
+        else{
+            encrypted+=text[i];
+        }
+    }
+    output.value=encrypted;
+}
+
